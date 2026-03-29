@@ -8,23 +8,23 @@ This repository contains the official implementation of the paper: **"Manufactur
 
 ---
 
-## 📌 Abstract
+##  Abstract
 Manufacturing systems produce vast volumes of free-form textual reports. Categorizing these by severity (CRITICAL, MAJOR, MINOR, UNCLEAR) is vital for maintenance prioritization. This project compares **CNN, BiLSTM+Attention, RCNN, and Transformers**. Our proposed **BERT-based classifier**, featuring **Attentive Pooling** and **Multi-sample Dropout**, achieves a state-of-the-art **97.3% accuracy** on domain-specific industrial data.
 
 
 
 ---
 
-## 🏷️ Label Definitions & Severity Criteria
+##  Label Definitions & Severity Criteria
 
 We define four severity levels based on industrial quality control guidelines. Understanding these labels is key to the model's logic:
 
 | Label | Severity | Description | Example Keywords |
 | :--- | :---: | :--- | :--- |
-| **CRITICAL** | 🔴 | Structural failures or safety risks. Requires immediate action. | *leak, hole, fire hazard, missing part* |
-| **MAJOR** | 🟠 | Significant quality issues affecting functionality or assembly. | *crack, bent, deep dent, malfunction* |
-| **MINOR** | 🟡 | Cosmetic imperfections; does not affect product performance. | *scratch, stain, smudge, discoloration* |
-| **UNCLEAR** | ⚪ | Ambiguous, underspecified, or administrative entries. | *check, see notes, incomplete, unclear* |
+| **CRITICAL**  | Structural failures or safety risks. Requires immediate action. | *leak, hole, fire hazard, missing part* |
+| **MAJOR** | Significant quality issues affecting functionality or assembly. | *crack, bent, deep dent, malfunction* |
+| **MINOR** | Cosmetic imperfections; does not affect product performance. | *scratch, stain, smudge, discoloration* |
+| **UNCLEAR**  | Ambiguous, underspecified, or administrative entries. | *check, see notes, incomplete, unclear* |
 
 > **Note:** These labels were validated against [Tên ngành của bạn, ví dụ: Baijiu Packaging] quality standards.
 
@@ -32,7 +32,7 @@ We define four severity levels based on industrial quality control guidelines. U
 
 ---
 
-## 🏗 Model Architecture: BERT + Custom Head
+##  Model Architecture: BERT + Custom Head
 The core of our research is a modified BERT-base model designed for small, noisy industrial datasets.
 
 - **Attentive Pooling:** Instead of using only the `[CLS]` token, we aggregate hidden states from all tokens using an attention mechanism to capture fine-grained defect cues.
@@ -43,15 +43,15 @@ The core of our research is a modified BERT-base model designed for small, noisy
 
 ---
 
-## 📊 Performance Summary
+##  Performance Summary
 
 ### 1. Model Comparison (In-Domain)
 | Model | Accuracy | Macro-F1 | Weighted-F1 |
 | :--- | :---: | :---: | :---: |
-| CNN (KimCNN) | 0.966 | 0.966 | 0.966 |
-| BiLSTM + Attention | 0.939 | 0.939 | 0.939 |
-| RCNN | 0.949 | 0.949 | 0.949 |
-| **BERT + Custom Head** | **0.973** | **0.973** | **0.973** |
+BiLSTM + Attention	0.5996	0.5903	0.8894
+RCNN	0.6007	0.5924	0.9174
+CNN (KimCNN)	0.6094	0.6016	0.9256
+Transformer Encoder	0.6096	0.6011	0.9443
 
 ### 2. Ablation Study
 | Variant | Accuracy | Δ |
@@ -62,12 +62,4 @@ The core of our research is a modified BERT-base model designed for small, noisy
 
 ![Confusion Matrix](./results/confusion_matrix.png)
 
----
 
-## 🛠 Installation & Usage
-
-### Setup
-```bash
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-cd your-repo-name
-pip install -r requirements.txt
